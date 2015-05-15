@@ -33,8 +33,6 @@ var app = app || {};
 			'click #form_submit': 'add_entry'
 		},		
 		initialize: function() {
-			console.log('collection view initialized');
-
 			this.collection = new ToDid_Collection();
 			this.collection.fetch();
 			this.collection.toJSON();
