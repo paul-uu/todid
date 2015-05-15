@@ -1,4 +1,4 @@
-# todid - An app for what you did
+# ToDid - an app for what you did
 
 There's plenty of 'ToDo' apps out there on the internet. Well here's one for things that you did.
 
