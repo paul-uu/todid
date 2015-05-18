@@ -16,8 +16,9 @@
 			<div class='view_toggle' id='toggle_new'>new to-did</div>
 			<div class='view_toggle' id='toggle_old'>old entries</div>
 		</header>
-		<div id='date'></div>
+		
 		<div id='form_container'>
+			<div id='date'></div>
 			<div id='form_read' class='form_section'>
 				<h3 class='form_section_title'>what have you read today?</h3>
 				<input class='form_input' type='text' placeholder='title'>
@@ -48,23 +49,21 @@
 			<br>
 			<button id='form_submit'>save</button>
 		</div>
-		<hr>
-
-		<div id='todid_listing'></div>
+		<div id='todid_listing' class='hidden'></div>
 	</div>
 
 	<!-- Underscore Templates -->
 	<script type='text/template' id='todid_model_template'>
-		<h3>entry:</h3>
-		<div> <%= attributes.read_title %> </div>
-		<div> <%= attributes.read_url %> </div>
-		<div> <%= attributes.read_tldr %> </div>
-		<div> <%= attributes.activity %> </div>
-		<div> <%= attributes.thought_ideas %> </div>
-		<div> <%= attributes.food %> </div>
-		<div> <%= attributes.music %> </div>
-		<div> <%= attributes.music_thoughts %> </div>
-		<div> <%= attributes.new %> </div>
+		<h3><span><%= attributes.date %></span> - <span><%= attributes.time %></span></h3>
+
+		<div><span class='entry_label'>I read:</span> <a href=&#39;<%= attributes.read_url %>&#39;><%= attributes.read_title %></a><br><span class='entry_label'>tl;dr:</span> <%= attributes.read_tldr %>
+		</div>
+		<div><span class='entry_label'>Activity:</span> <%= attributes.activity %> </div>
+		<div><span class='entry_label'>Thought/Idea:</span> <%= attributes.thought_ideas %> </div>
+		<div><span class='entry_label'>Food:</span> <%= attributes.food %> </div>
+		<div><span class='entry_label'>Music:</span> <%= attributes.music %> </div>
+		<div><span class='entry_label'>Thoughts:</span> <%= attributes.music_thoughts %> </div>
+		<div><span class='entry_label'>Something new:</span> <%= attributes.new %> </div>
 		<button class='delete_entry'>delete</button>
 	</script>
 
