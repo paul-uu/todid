@@ -10,18 +10,62 @@
 <body>
 	
 	<!-- Page Content -->
-	<div id='everything'>
-		<div id='form'>
-			<input type='text' id='form_input' placeholder='entry'>
+	<div id='page_container'>
+		<header>
+			<h2>to-did MV*</h2>
+			<div class='view_toggle' id='toggle_new'>new to-did</div>
+			<div class='view_toggle' id='toggle_old'>old entries</div>
+		</header>
+		<div id='date'></div>
+		<div id='form_container'>
+			<div id='form_read' class='form_section'>
+				<h3 class='form_section_title'>what have you read today?</h3>
+				<input class='form_input' type='text' placeholder='title'>
+				<input class='form_input' type='text' placeholder='url'>
+				<input class='form_input' type='text' placeholder='tl;dr'>
+			</div>
+			<div id='form_activity' class='form_section'>
+				<h3 class='form_section_title'>what have you done today?</h3>
+				<input class='form_input' type='text' placeholder='activity'>
+			</div>
+			<div id='form_thought' class='form_section'>
+				<h3 class='form_section_title'>what have you thought about today?</h3>
+				<input class='form_input' type='text' placeholder='thoughts or ideas'>
+			</div>
+			<div id='form_food' class='form_section'>
+				<h3 class='form_section_title'>what have you eaten today?</h3>
+				<input class='form_input' type='text' placeholder='noms?'>
+			</div>
+			<div id='form_listen' class='form_section'>
+				<h3 class='form_section_title'>what have you listened to today?</h3>
+				<input class='form_input' type='text' placeholder='tunes'>
+				<input class='form_input' type='text' placeholder='thoughts'>
+			</div>
+			<div id='form_new' class='form_section'>
+				<h3 class='form_section_title'>what's something new you've tried today?</h3>
+				<input class='form_input' type='text' placeholder='what&#39;s new?'>
+			</div>
+			<br>
 			<button id='form_submit'>save</button>
 		</div>
 		<hr>
+
 		<div id='todid_listing'></div>
 	</div>
 
 	<!-- Underscore Templates -->
 	<script type='text/template' id='todid_model_template'>
-		Entry: <%= attributes.entry %>
+		<h3>entry:</h3>
+		<div> <%= attributes.read_title %> </div>
+		<div> <%= attributes.read_url %> </div>
+		<div> <%= attributes.read_tldr %> </div>
+		<div> <%= attributes.activity %> </div>
+		<div> <%= attributes.thought_ideas %> </div>
+		<div> <%= attributes.food %> </div>
+		<div> <%= attributes.music %> </div>
+		<div> <%= attributes.music_thoughts %> </div>
+		<div> <%= attributes.new %> </div>
+		<button class='delete_entry'>delete</button>
 	</script>
 
 	<!-- Javascript Files -->
