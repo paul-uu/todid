@@ -4,15 +4,16 @@ var app = app || {};
 	// ----------------------------------------------------------
 	// Date stuff:
 	Date.prototype.today = function () {  // today's date;
-	    return (((this.getMonth()+1) < 10) ? '0':'') + (this.getMonth()+1) +'/'+ ( (this.getDate() < 10) ? '0':'') + this.getDate() +'/'+ this.getFullYear();
-	}
+		return (((this.getMonth()+1) < 10) ? '0':'') + (this.getMonth()+1) +'/'+ ( (this.getDate() < 10) ? '0':'') + this.getDate() +'/'+ this.getFullYear();
+	};
 	Date.prototype.timeNow = function () {  // current time
-	    return ((this.getHours() < 10) ? '0':'') + this.getHours() +':'+ ((this.getMinutes() < 10) ? '0':'') + this.getMinutes();
-	}
+		return ((this.getHours() < 10) ? '0':'') + this.getHours() +':'+ ((this.getMinutes() < 10) ? '0':'') + this.getMinutes();
+	};
 	var today = new Date();
 	var date = today.today(),
-		time = today.timeNow();
-	$('#date').text(date + ' - ' + time);
+		time = today.timeNow(),
+		date_time = today.getTime();
+	$('#date').text(date);
 	
 
 	// ----------------------------------------------------------
@@ -23,6 +24,7 @@ var app = app || {};
 		defaults: {
 			'date': date,
 			'time': time,
+			'date_time': date_time,
 			'read_title': '',
 			'read_url': '',
 			'read_tldr': '',
@@ -98,9 +100,14 @@ var app = app || {};
 			$('.form_input').each(function(i) {
 				input.push($(this).val());
 			});
+			date = today.today();
+			time = today.timeNow();
+			date_time = today.getTime();
+
 			new_entry = new ToDid_Model({
 				'date': date,
 				'time': time,
+				'date_time': date_time,
 				'read_title': input[0],
 				'read_url': input[1],
 				'read_tldr': input[2],
@@ -116,11 +123,11 @@ var app = app || {};
 			$('.form_input').val('');
 		},
 		show_form: function() {
-			$('#todid_listing').addClass('hidden');			
+			$('#todid_listing').addClass('hidden');
 			$('#form_container').removeClass('hidden');
 		},
 		show_entries: function() {
-			$('#form_container').addClass('hidden');			
+			$('#form_container').addClass('hidden');
 			$('#todid_listing').removeClass('hidden');
 		}
 	});
