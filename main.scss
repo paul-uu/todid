@@ -1,9 +1,16 @@
+@mixin box-sizing {
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;	
+}
+
 html {
+	@include box-sizing;
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	color: #666;
+	color: #555;
 	margin: 0 0;
 	padding: 0 0;
-	box-sizing: border-box;
+	letter-spacing: 0.5px;		
 }
 
 #page_container {
@@ -26,7 +33,7 @@ header h2 {
 	color: lime;
 }
 header {
-	border-bottom: 1px solid #666;
+	border-bottom: 1px solid #555;
 }
 
 #date {
@@ -44,18 +51,55 @@ header {
 	margin-bottom: 10px;
 }
 
-.form_input {
-	display: block;
+textarea.form_textarea {
+	@include box-sizing;
+	width: 100%;
+	height: 70px;
+	font-size: 16px;
+	padding: 5px;
+	resize: none;
+	color: #555;
+	letter-spacing: 1px;
+}
+textarea.form_textarea:focus {
+	color: #555;	
+	outline-width: 0;
+}
+#form_submit {
 	width: 100%;
 	height: 30px;
-	margin: 5px 0 5px 0;
-	padding: 3px;
-	font-size: 16px;
-	border-top: none;
-	border-right: none;
-	border-left: none;
-	border-bottom: 1px solid #999;
+	background-color: white;
+	border: 1px solid #999;
+	text-align: center;
+	padding-top: 10px;
+	cursor: pointer;
 }
-.form_input:focus {
-    outline-width: 0px;
+#form_submit:hover {
+	border: 1px solid #FC8174;
+	background-color: #FC8174;
+	color: white;
+}
+.entry_text {
+	color: #777;
+}
+
+
+/* Past entries styling */
+.todid_item {
+	padding: 25px 0;
+}
+.entry_header {
+	margin: 0 0 10px 0;
+}
+.entry_label {
+	font-weight: bold;
+}
+.entry_item_container {
+	margin-bottom: 10px;
+}
+
+
+
+.hidden {
+	display: none;
 }
