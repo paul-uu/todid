@@ -3,6 +3,13 @@
        -moz-box-sizing: border-box;
             box-sizing: border-box;	
 }
+@mixin transition($attribute, $time, $easing) {
+	-webkit-transition: $attribute $time $easing;
+       -moz-transition: $attribute $time $easing;
+    	-ms-transition: $attribute $time $easing;
+    	 -o-transition: $attribute $time $easing;
+    		transition: $attribute $time $easing;	
+}
 
 html {
 	@include box-sizing;
@@ -73,6 +80,8 @@ textarea.form_textarea:focus {
 	text-align: center;
 	padding-top: 10px;
 	cursor: pointer;
+	@include transition(all, 0.2s,  linear);
+
 }
 #form_submit:hover {
 	border: 1px solid #FC8174;
