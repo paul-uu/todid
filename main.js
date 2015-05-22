@@ -25,15 +25,10 @@ var app = app || {};
 			'date': date,
 			'time': time,
 			'date_time': date_time,
-			'read_title': '',
-			'read_url': '',
-			'read_tldr': '',
-			'activity': '',
-			'thought_idea': '',
-			'food': '',
-			'music': '',
-			'music_thoughts':'',
-			'new': ''
+			'day': '',
+			'stuff': '',
+			'thoughts': '',
+			'food': ''
 		}
 	});
 	// Collection
@@ -97,7 +92,7 @@ var app = app || {};
 		add_entry: function() {
 			console.log('add entry function');
 			var input = [];
-			$('.form_input').each(function(i) {
+			$('.form_textarea').each(function(i) {
 				input.push($(this).val());
 			});
 			date = today.today();
@@ -108,19 +103,15 @@ var app = app || {};
 				'date': date,
 				'time': time,
 				'date_time': date_time,
-				'read_title': input[0],
-				'read_url': input[1],
-				'read_tldr': input[2],
-				'activity': input[3],
-				'thought_idea': input[4],
-				'food': input[5],
-				'music': input[6],
-				'music_thoughts': input[7],
-				'new': input[8]
+				'day': input[0],
+				'stuff': input[1],
+				'thoughts': input[2],
+				'food': input[3]
+
 			});
 			this.collection.add(new_entry);
 			new_entry.save();
-			$('.form_input').val('');
+			$('.form_textarea').val('');
 		},
 		show_form: function() {
 			$('#todid_listing').addClass('hidden');
