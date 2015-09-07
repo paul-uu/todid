@@ -47,7 +47,6 @@ var app = app || {};
 		},
 		template: _.template($('#todid_model_template').html()),
 		initialize: function() {
-			console.log('model view initialized');
 			this.render();
 		},
 		render: function() {
@@ -55,7 +54,6 @@ var app = app || {};
 			return this;
 		},
 		delete_entry: function() {
-			console.log('delete');
 			this.model.destroy();	// delete model
 			this.remove();			// delete view
 		}
@@ -69,7 +67,6 @@ var app = app || {};
 			'click #toggle_old': 'show_entries'
 		},
 		initialize: function() {
-			console.log('todid initialize');
 			this.collection = new ToDid_Collection();
 			this.collection.fetch();
 			this.collection.toJSON();
@@ -90,7 +87,6 @@ var app = app || {};
 			this.$('#todid_listing').append(model_view.render().el);
 		},
 		add_entry: function() {
-			console.log('add entry function');
 			var input = [];
 			$('.form_textarea').each(function(i) {
 				input.push($(this).val());
