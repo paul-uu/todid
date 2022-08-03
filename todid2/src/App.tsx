@@ -44,10 +44,8 @@ function App() {
     }, [savedToDids]);
 
     useEffect(() => {
-        if (selectedTab === TABS.OLD && savedToDids === null) {
-            let todids = getToDids();
-            setSavedToDids(todids);
-        }
+        if (selectedTab === TABS.OLD && savedToDids === null) 
+            setSavedToDids(getToDids());
     }, [selectedTab]);
 
     const handleAddNewTodid = (todid: IToDid) => {
