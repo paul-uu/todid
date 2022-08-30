@@ -9,3 +9,8 @@ export interface IToDid {
     thoughts: string;
     food: string;
 }
+
+export interface IOption {
+    value: string;
+    label: string;
+}

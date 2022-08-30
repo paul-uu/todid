@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState } from 'react'
 import styled from 'styled-components';
 import { IToDid } from '../interfaces';
 import { BsTrash } from 'react-icons/bs';
@@ -13,6 +13,7 @@ const StyledToDid = styled.div`
     margin-bottom: 20px;
     background-color: #eee;
     padding: 8px;
+    font-size: 16px;
 
     label {
         color: #888;
@@ -30,19 +31,37 @@ const Entry = styled.div`
 `;
 
 const Delete = styled.div`
-    display: inline-block;
+    display: block;
+    margin-top: 24px;
     cursor: pointer;
+    font-size: 14px;
+    color: #888;
+`;
+
+const DeleteWarning = styled.div`
+    color: tomato;
+    span {
+        margin: 0 4px;
+        &:hover {
+            color: red;
+        }
+    }
+`;
+
+const DeleteButton = styled.div`
+    svg { 
+        vertical-align: middle;
+    }
 `;
 
 const ToDid = (props: ToDidProps) => {
     const { todidId, todid, deleteTodid } = props;
     const { date, time, day, stuff, thoughts, food } = todid;
+    const [deleteWarning, setDeleteWarning] = useState(false);
 
     const handleDelete = (e: any) => {
         deleteTodid(todidId);
     }
-
-    //console.log(todid);
 
     return (
         <StyledToDid>
@@ -76,8 +95,17 @@ const ToDid = (props: ToDidProps) => {
             </>
             }
 
-            <Delete onClick={handleDelete}>
-                delete <BsTrash />
+            <Delete>
+                { deleteWarning
+                    ? 
+                    <DeleteWarning>
+                        Are you sure? 
+                        <span onClick={handleDelete}>yes</span>/
+                        <span onClick={() => setDeleteWarning(false)}>no</span>
+                    </DeleteWarning>
+                    : 
+                    <DeleteButton onClick={() => setDeleteWarning(true)}>delete <BsTrash /></DeleteButton>
+                }
             </Delete>
 
         </StyledToDid>

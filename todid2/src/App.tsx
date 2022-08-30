@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Header from './components/Header';
 import { IToDid } from './interfaces';
 import ToDidForm from './components/ToDidForm';
-import ToDidsList from './components/ToDidsList';
+import ToDidsList from './components/ToDidsList/ToDidsList';
 
 export const TABS = {
     NEW: 'NEW',
@@ -19,7 +19,6 @@ const LS_KEY = 'ToDid_LS';
 const getToDids = () => {
     let todids = {};
     let ids = Object.keys(window.localStorage).filter(key => key.includes(LS_KEY));
-    console.log(ids);
     ids.forEach(id => {
         let todid = window.localStorage.getItem(id);
         if (todid) {

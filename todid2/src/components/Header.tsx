@@ -13,13 +13,13 @@ const StyledTabs = styled.div`
     color: #555;
 
     .selected {
-        color: red;
+        color: tomato;
     }
 
     > div {
         cursor: pointer;
         &:hover {
-            color: blue;
+            color: tomato;
         }
     }
 `;
