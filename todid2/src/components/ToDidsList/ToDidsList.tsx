@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { SORT_OPTIONS } from './constants';
 import Sort from './Sort';
 import Search from './Search';
+import StartFilter from './StarFilter';
 import List from './List';
 
 type IToDidsListProps = {
@@ -15,6 +16,10 @@ const ToDidsList:FC<IToDidsListProps> = (props) => {
     const { todids, deleteTodid, updateTodid } = props;
     const [sort, setSort] = useState(SORT_OPTIONS.NEW.value);
     const [search, setSearch] = useState('');
+    const [starFilter, setStarFilter] = useState(false);
+
+    // todo: move search/sort/filter logic from List to here
+    
     return (
         <>
             <Controls>
@@ -22,6 +27,10 @@ const ToDidsList:FC<IToDidsListProps> = (props) => {
                     search={search} 
                     setSearch={setSearch} 
                     className=''
+                />
+                <StartFilter 
+                    starFilter={starFilter}
+                    setStarFilter={setStarFilter}
                 />
                 <Sort 
                     sort={sort} 
@@ -35,7 +44,8 @@ const ToDidsList:FC<IToDidsListProps> = (props) => {
                 : <List 
                     todids={todids} 
                     search={search} 
-                    sort={sort} 
+                    sort={sort}
+                    starFilter={starFilter}
                     deleteTodid={deleteTodid} 
                     updateTodid={updateTodid}
                     className='' />

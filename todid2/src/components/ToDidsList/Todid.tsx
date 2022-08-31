@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import styled from 'styled-components';
-import { IToDid } from '../interfaces';
+import { IToDid } from '../../interfaces';
 import { BsTrash } from 'react-icons/bs';
-import Star from './Shared/Star';
+import Star from '../Shared/Star';
 
 type ToDidProps = {
     todidId: string,

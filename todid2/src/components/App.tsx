@@ -1,23 +1,22 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import Header from './components/Header';
-import { IToDid } from './interfaces';
-import ToDidForm from './components/ToDidForm';
-import ToDidsList from './components/ToDidsList/ToDidsList';
-import { TABS, LS_KEY } from './constants';
-import { getUniqueId } from './utils';
+import Header from './Header';
+import { IToDid } from '../interfaces';
+import ToDidForm from './ToDidForm';
+import ToDidsList from './ToDidsList/ToDidsList';
+import { TABS, LS_KEY } from '../constants';
+import { getUniqueId } from '../utils';
 
 // todo: look into indexedDb replacing localstorage
 
 const readTodids = () => {
-    let todids = {};
+    let todids:{ [key: string]: any } = {};
     let ids = Object.keys(window.localStorage).filter(key => key.includes(LS_KEY));
     ids.forEach(id => {
         let todid = window.localStorage.getItem(id);
         if (todid) {
             todid = JSON.parse(todid);
         }
-        // @ts-ignore
         todids[id] = todid;
     });
     return todids;

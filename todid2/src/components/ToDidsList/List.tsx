@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import { IToDid } from '../../interfaces';
 import { SORT_OPTIONS } from './constants';
-import Todid from '../Todid';
+import Todid from './Todid';
 
 const List = (
-    { todids, search, sort, deleteTodid, updateTodid, className }: 
-    { todids: any, search: string, sort: string, deleteTodid: Function, updateTodid: Function, className: string }) => {
+    { todids, search, sort, starFilter, deleteTodid, updateTodid, className }: 
+    { todids: any, search: string, sort: string, starFilter: boolean, deleteTodid: Function, updateTodid: Function, className: string }) => {
     
     let todidIds;
     if (search) {
@@ -29,6 +29,15 @@ const List = (
         else
             return dateTimeB - dateTimeA;
     });
+
+    // Star Filter
+    if (starFilter) {
+        todidIds = Object.keys(todids).filter(todidId => {
+            let todid: IToDid = todids[todidId];
+            return todid.starred;
+        })
+    }
+
     return (
         <div className={className}>
             { todidIds.map((todidId: string) => {
