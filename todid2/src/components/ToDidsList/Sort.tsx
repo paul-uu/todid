@@ -1,4 +1,3 @@
-import { FC, useState } from 'react';
 import styled from 'styled-components';
 import { SORT_OPTIONS } from './constants';
 import { IOption } from '../../interfaces';

@@ -1,4 +1,3 @@
-import { FC, useState } from 'react';
 import styled from 'styled-components';
 
 const Search = ({search, setSearch, className}: { search: string, setSearch: Function, className: string }) => {

@@ -2,11 +2,13 @@ import { useState } from 'react'
 import styled from 'styled-components';
 import { IToDid } from '../interfaces';
 import { BsTrash } from 'react-icons/bs';
+import Star from './Shared/Star';
 
 type ToDidProps = {
     todidId: string,
     todid: IToDid,
-    deleteTodid: Function
+    deleteTodid: Function,
+    toggleStar: Function
 }
 
 const StyledToDid = styled.div`
@@ -55,8 +57,8 @@ const DeleteButton = styled.div`
 `;
 
 const ToDid = (props: ToDidProps) => {
-    const { todidId, todid, deleteTodid } = props;
-    const { date, time, day, stuff, thoughts, food } = todid;
+    const { todidId, todid, deleteTodid, toggleStar } = props;
+    const { date, time, day, stuff, thoughts, food, starred } = todid;
     const [deleteWarning, setDeleteWarning] = useState(false);
 
     const handleDelete = (e: any) => {
@@ -65,7 +67,13 @@ const ToDid = (props: ToDidProps) => {
 
     return (
         <StyledToDid>
-            <Date>{`${date} - ${time}`}</Date>
+            <div>
+                <Date>{`${date} - ${time}`}</Date>
+                <Star 
+                    isStarred={starred}
+                    setIsStarred={() => toggleStar(todidId, !starred)}
+                />
+            </div>
 
             { day && 
             <>

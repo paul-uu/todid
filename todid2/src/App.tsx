@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Header from './components/Header';
 import { IToDid } from './interfaces';
@@ -50,12 +50,9 @@ function App() {
     const handleAddNewTodid = (todid: IToDid) => {
         const newTodidKey = `${LS_KEY}-${getUniqueId()}`;
         window.localStorage.setItem(newTodidKey, JSON.stringify(todid))
-
-        // save to ui state
         setSavedToDids(todids => {
             if (todids) {
                 return {
-                    // @ts-ignore
                     ...todids,
                     [newTodidKey]: todid
                 }
@@ -65,18 +62,27 @@ function App() {
     }
 
     const handleDeleteTodid = (id: string) => {
-        // remove from localstorage
         window.localStorage.removeItem(id);
-
-        // remove from ui state
         setSavedToDids(todids => {
-            // @ts-ignore
-            let copy = {...todids};
-            // @ts-ignore
+            let copy: { [key: string]: any } = {...todids};
             delete copy[id];
             return copy;
         });
     }
+
+    const handleToggleStar = (id: string, isStarred: boolean) => {
+        let todid = window.localStorage.getItem(id);
+        if (todid) {
+            let todidObj = JSON.parse(todid);
+            todidObj.starred = isStarred;
+            window.localStorage.setItem(id, JSON.stringify(todidObj));
+            setSavedToDids(todids => {
+                let copy: { [key: string]: any } = {...todids};
+                copy[id] = todidObj;
+                return copy;
+            });
+        }
+    } 
 
     return (
         <Container className="App">
@@ -88,7 +94,8 @@ function App() {
                 ? <ToDidForm addNewTodid={handleAddNewTodid} />
                 : <ToDidsList 
                     todids={savedToDids}
-                    deleteTodid={handleDeleteTodid} />
+                    deleteTodid={handleDeleteTodid}
+                    toggleStar={handleToggleStar} />
             }
         </Container>
     );

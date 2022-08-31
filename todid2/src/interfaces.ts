@@ -8,6 +8,7 @@ export interface IToDid {
     stuff: string;
     thoughts: string;
     food: string;
+    starred: boolean;
 }
 
 export interface IOption {

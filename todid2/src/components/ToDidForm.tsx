@@ -1,6 +1,7 @@
-import React, { FC, useState } from 'react';
+import { FC, useState } from 'react';
 import styled from 'styled-components';
 import { format } from 'date-fns';
+import Star from './Shared/Star';
 
 type ToDidFormProps = {
     addNewTodid: Function
@@ -54,12 +55,18 @@ const Button = styled.button`
     }
 `;
 
+const ToDidHeader = styled.div`
+    display: flex;
+    justify-content: space-between;
+`;
+
 const ToDidForm:FC<ToDidFormProps> = (props) => {
 
     const [day, setDay] = useState('');
     const [stuff, setStuff] = useState('');
     const [thoughts, setThoughts] = useState('');
     const [food, setFood] = useState('');
+    const [starred, setStarred] = useState(false);
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
@@ -75,7 +82,8 @@ const ToDidForm:FC<ToDidFormProps> = (props) => {
                 day, 
                 stuff, 
                 thoughts, 
-                food
+                food,
+                starred
             });
             handleReset();
         }
@@ -96,7 +104,14 @@ const ToDidForm:FC<ToDidFormProps> = (props) => {
 
     return (
         <>
-            <div>{ format(new Date(), 'MMM, dd yyyy') }</div>
+            <ToDidHeader>
+                <div>{ format(new Date(), 'MMM, dd yyyy') }</div>
+                <Star
+                    isStarred={starred}
+                    setIsStarred={setStarred}
+                />
+            </ToDidHeader>
+
             <form onSubmit={handleSubmit}>
 
                 <StyledTextarea 
