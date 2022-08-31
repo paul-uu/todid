@@ -8,7 +8,7 @@ type ToDidProps = {
     todidId: string,
     todid: IToDid,
     deleteTodid: Function,
-    toggleStar: Function
+    updateTodid: Function
 }
 
 const StyledToDid = styled.div`
@@ -57,7 +57,7 @@ const DeleteButton = styled.div`
 `;
 
 const ToDid = (props: ToDidProps) => {
-    const { todidId, todid, deleteTodid, toggleStar } = props;
+    const { todidId, todid, deleteTodid, updateTodid } = props;
     const { date, time, day, stuff, thoughts, food, starred } = todid;
     const [deleteWarning, setDeleteWarning] = useState(false);
 
@@ -71,7 +71,13 @@ const ToDid = (props: ToDidProps) => {
                 <Date>{`${date} - ${time}`}</Date>
                 <Star 
                     isStarred={starred}
-                    setIsStarred={() => toggleStar(todidId, !starred)}
+                    setIsStarred={() => updateTodid(
+                        todidId, 
+                        {
+                            ...todid,
+                            starred: !starred
+                        }
+                    )}
                 />
             </div>
 

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { TABS } from '../App';
+import { TABS } from '../constants';
 
 type HeaderProps = {
     selectedTab: string,
