@@ -4,7 +4,8 @@ import { AiOutlineStar, AiFillStar, } from 'react-icons/ai';
 
 type StarProps = {
     isStarred: boolean,
-    setIsStarred: Function
+    setIsStarred: Function,
+    className?: string
 }
 
 const StarEl = styled.div`
@@ -15,9 +16,9 @@ const StarEl = styled.div`
 `;
 
 const Star:FC<StarProps> = (props) => {
-    const { isStarred, setIsStarred } = props;
+    const { isStarred, setIsStarred, className } = props;
     return (
-        <StarEl title='Star this todid'>
+        <StarEl className={className} title='Star this todid'>
         { isStarred
             ? <AiFillStar onClick={() => setIsStarred(false)} /> 
             : <AiOutlineStar onClick={() => setIsStarred(true)} /> 

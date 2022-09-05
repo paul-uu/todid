@@ -31,6 +31,7 @@ const ToDidsList:FC<IToDidsListProps> = (props) => {
                 <StartFilter 
                     starFilter={starFilter}
                     setStarFilter={setStarFilter}
+                    className=''
                 />
                 <Sort 
                     sort={sort} 
@@ -57,6 +58,10 @@ const ToDidsList:FC<IToDidsListProps> = (props) => {
 const Controls = styled.div`
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: #555;
+    padding: 0 0 5px 0;
 `;
 
 export default ToDidsList;

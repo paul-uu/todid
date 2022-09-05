@@ -11,51 +11,6 @@ type ToDidProps = {
     updateTodid: Function
 }
 
-const StyledToDid = styled.div`
-    margin-bottom: 20px;
-    background-color: #eee;
-    padding: 8px;
-    font-size: 16px;
-
-    label {
-        color: #888;
-        display: block;
-    }
-`;
-
-const Date = styled.div`
-    color: #888;
-    margin-bottom: 8px;
-`;
-
-const Entry = styled.div`
-    margin-bottom: 16px;
-`;
-
-const Delete = styled.div`
-    display: block;
-    margin-top: 24px;
-    cursor: pointer;
-    font-size: 14px;
-    color: #888;
-`;
-
-const DeleteWarning = styled.div`
-    color: tomato;
-    span {
-        margin: 0 4px;
-        &:hover {
-            color: red;
-        }
-    }
-`;
-
-const DeleteButton = styled.div`
-    svg { 
-        vertical-align: middle;
-    }
-`;
-
 const ToDid = (props: ToDidProps) => {
     const { todidId, todid, deleteTodid, updateTodid } = props;
     const { date, time, day, stuff, thoughts, food, starred } = todid;
@@ -109,21 +64,78 @@ const ToDid = (props: ToDidProps) => {
             </>
             }
 
-            <Delete>
-                { deleteWarning
-                    ? 
-                    <DeleteWarning>
-                        Are you sure? 
-                        <span onClick={handleDelete}>yes</span>/
-                        <span onClick={() => setDeleteWarning(false)}>no</span>
-                    </DeleteWarning>
-                    : 
-                    <DeleteButton onClick={() => setDeleteWarning(true)}>delete <BsTrash /></DeleteButton>
-                }
+            <Delete className='todid__delete'>
+            { deleteWarning
+                ? 
+                <DeleteWarning>
+                    Are you sure? 
+                    <span onClick={handleDelete}>yes</span>/
+                    <span onClick={() => setDeleteWarning(false)}>no</span>
+                </DeleteWarning>
+                : 
+                <DeleteButton onClick={() => setDeleteWarning(true)}>delete <BsTrash /></DeleteButton>
+            }
             </Delete>
 
         </StyledToDid>
     )
 }
+
+const StyledToDid = styled.div`
+    margin-bottom: 20px;
+    background-color: #eee;
+    padding: 8px;
+    font-size: 16px;
+
+    label {
+        color: #888;
+        display: block;
+    }
+
+    &:hover {
+        .todid__delete {
+            visibility: visible;
+        }
+    }
+`;
+
+const Date = styled.div`
+    color: #888;
+    margin-bottom: 8px;
+`;
+
+const Entry = styled.div`
+    margin-bottom: 16px;
+`;
+
+const Delete = styled.div`
+    display: block;
+    margin-top: 24px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #777;
+    visibility: hidden;
+
+    &:hover {
+        color: #555;
+    }
+`;
+
+const DeleteWarning = styled.div`
+    color: tomato;
+    span {
+        margin: 0 4px;
+        &:hover {
+            color: red;
+        }
+    }
+`;
+
+const DeleteButton = styled.div`
+    svg { 
+        vertical-align: middle;
+    }
+`;
+
 
 export default ToDid;
