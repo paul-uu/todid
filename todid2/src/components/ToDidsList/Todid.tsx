@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import styled from 'styled-components';
+import { useState, useContext } from 'react'
+import styled, { ThemeContext } from 'styled-components';
 import { IToDid } from '../../interfaces';
 import { BsTrash } from 'react-icons/bs';
 import Star from '../Shared/Star';
@@ -16,12 +16,14 @@ const ToDid = (props: ToDidProps) => {
     const { date, time, day, stuff, thoughts, food, starred } = todid;
     const [deleteWarning, setDeleteWarning] = useState(false);
 
+    const themeContext = useContext(ThemeContext);
+
     const handleDelete = (e: any) => {
         deleteTodid(todidId);
     }
 
     return (
-        <StyledToDid>
+        <StyledToDid theme={themeContext}>
             <div>
                 <Date>{`${date} - ${time}`}</Date>
                 <Star 
@@ -83,7 +85,7 @@ const ToDid = (props: ToDidProps) => {
 
 const StyledToDid = styled.div`
     margin-bottom: 20px;
-    background-color: #eee;
+    background-color: ${props => props.theme.backgroundSecondary};
     padding: 8px;
     font-size: 16px;
 

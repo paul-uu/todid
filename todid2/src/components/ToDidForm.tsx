@@ -1,5 +1,5 @@
-import { FC, useState } from 'react';
-import styled from 'styled-components';
+import { FC, useState, useContext } from 'react';
+import styled, { ThemeContext } from 'styled-components';
 import { format } from 'date-fns';
 import Star from './Shared/Star';
 
@@ -14,6 +14,9 @@ const StyledTextarea = styled.textarea`
     margin-bottom: 20px;
     width: 100%;
     padding: 8px;
+
+    color: ${props => props.theme.main};
+    background-color: ${props => props.theme.backgroundSecondary};
 
     &:focus {
         outline-width: 0;
@@ -68,6 +71,9 @@ const ToDidForm:FC<ToDidFormProps> = (props) => {
     const [food, setFood] = useState('');
     const [starred, setStarred] = useState(false);
 
+    const themeContext = useContext(ThemeContext);
+    console.log(themeContext);
+
     const handleSubmit = (e: any) => {
         e.preventDefault();
 
@@ -119,24 +125,28 @@ const ToDidForm:FC<ToDidFormProps> = (props) => {
                     value={day}
                     onChange={(e) => setDay(e.target.value)}
                     rows={5}
+                    theme={themeContext}
                 />
                 <StyledTextarea  
                     placeholder='Read, see, or listen to anything good?' 
                     value={stuff}
                     onChange={(e) => setStuff(e.target.value)}
                     rows={5}
+                    theme={themeContext}
                 />
                 <StyledTextarea  
                     placeholder='Have any interesting thoughts or ideas?' 
                     value={thoughts}
                     onChange={(e) => setThoughts(e.target.value)}
                     rows={5}
+                    theme={themeContext}
                 />
                 <StyledTextarea  
                     placeholder="What'd you eat today?"
                     value={food}
                     onChange={(e) => setFood(e.target.value)}
                     rows={5}
+                    theme={themeContext}
                 />
 
                 <Buttons>

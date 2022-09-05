@@ -1,5 +1,5 @@
-import { FC, useState } from 'react';
-import styled from 'styled-components';
+import { FC, useState, useContext } from 'react';
+import styled, { ThemeContext } from 'styled-components';
 import { SORT_OPTIONS } from './constants';
 import Sort from './Sort';
 import Search from './Search';
@@ -18,11 +18,13 @@ const ToDidsList:FC<IToDidsListProps> = (props) => {
     const [search, setSearch] = useState('');
     const [starFilter, setStarFilter] = useState(false);
 
+    const themeContext = useContext(ThemeContext);
+
     // todo: move search/sort/filter logic from List to here
     
     return (
         <>
-            <Controls>
+            <Controls theme={themeContext}>
                 <Search 
                     search={search} 
                     setSearch={setSearch} 
@@ -60,7 +62,7 @@ const Controls = styled.div`
     justify-content: space-between;
     align-items: center;
     font-size: 12px;
-    color: #555;
+    color: ${props => props.theme.secondary};
     padding: 0 0 5px 0;
 `;
 

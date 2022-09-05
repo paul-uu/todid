@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 import Header from './Header';
 import { IToDid } from '../interfaces';
 import ToDidForm from './ToDidForm';
 import ToDidsList from './ToDidsList/ToDidsList';
 import { TABS, LS_KEY } from '../constants';
 import { getUniqueId } from '../utils';
+import { day, night } from '../themes';
 
 // todo: look into indexedDb replacing localstorage
 
@@ -26,6 +27,7 @@ function App() {
 
     const [selectedTab, setSelectedTab] = useState<string>(TABS.NEW);
     const [savedToDids, setSavedToDids] = useState<Object | null>(null);
+    const [isDayMode, setIsDayMode] = useState(true);
 
     useEffect(() => {
         if (selectedTab === TABS.OLD && savedToDids === null) 
@@ -67,19 +69,23 @@ function App() {
     }
 
     return (
-        <Container className="App">
-            <Header 
-                selectedTab={selectedTab}
-                setSelectedTab={setSelectedTab} 
-            />
-            { selectedTab === TABS.NEW
-                ? <ToDidForm addNewTodid={createTodid} />
-                : <ToDidsList 
-                    todids={savedToDids}
-                    deleteTodid={deleteTodid}
-                    updateTodid={updateTodid} />
-            }
-        </Container>
+        <ThemeProvider theme={isDayMode ? day : night }>
+            <Container className="App">
+                <Header 
+                    selectedTab={selectedTab}
+                    setSelectedTab={setSelectedTab}
+                    isDayMode={isDayMode} 
+                    setIsDayMode={setIsDayMode}
+                />
+                { selectedTab === TABS.NEW
+                    ? <ToDidForm addNewTodid={createTodid} />
+                    : <ToDidsList 
+                        todids={savedToDids}
+                        deleteTodid={deleteTodid}
+                        updateTodid={updateTodid} />
+                }
+            </Container>
+        </ThemeProvider>
     );
 }
 
@@ -88,6 +94,9 @@ const Container = styled.div`
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
+
+    color: ${props => props.theme.main};
+    background-color: ${props => props.theme.background};
 `;
 
 export default App;
