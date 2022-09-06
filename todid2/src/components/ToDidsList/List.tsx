@@ -4,8 +4,8 @@ import { SORT_OPTIONS } from './constants';
 import Todid from './Todid';
 
 const List = (
-    { todids, search, sort, starFilter, deleteTodid, updateTodid, className }: 
-    { todids: any, search: string, sort: string, starFilter: boolean, deleteTodid: Function, updateTodid: Function, className: string }) => {
+    { todids, search, sort, starFilter, deleteTodid, className }: 
+    { todids: any, search: string, sort: string, starFilter: boolean, deleteTodid: Function, className: string }) => {
     
     let todidIds;
     if (search) {
@@ -46,8 +46,7 @@ const List = (
                         key={todidId} 
                         todidId={todidId} 
                         todid={todids[todidId]} 
-                        deleteTodid={deleteTodid} 
-                        updateTodid={updateTodid}
+                        deleteTodid={deleteTodid}
                     />
                 )
             })}

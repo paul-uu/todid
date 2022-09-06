@@ -7,12 +7,11 @@ import Star from '../Shared/Star';
 type ToDidProps = {
     todidId: string,
     todid: IToDid,
-    deleteTodid: Function,
-    updateTodid: Function
+    deleteTodid: Function
 }
 
 const ToDid = (props: ToDidProps) => {
-    const { todidId, todid, deleteTodid, updateTodid } = props;
+    const { todidId, todid, deleteTodid } = props;
     const { date, time, day, stuff, thoughts, food, starred } = todid;
     const [deleteWarning, setDeleteWarning] = useState(false);
 
@@ -24,19 +23,16 @@ const ToDid = (props: ToDidProps) => {
 
     return (
         <StyledToDid theme={themeContext}>
-            <div>
+            <Header>
                 <Date>{`${date} - ${time}`}</Date>
-                <Star 
-                    isStarred={starred}
-                    setIsStarred={() => updateTodid(
-                        todidId, 
-                        {
-                            ...todid,
-                            starred: !starred
-                        }
-                    )}
-                />
-            </div>
+                { starred &&
+                    <Star 
+                        isStarred={starred}
+                        setIsStarred={() => {}}
+                        isDisabled={true}
+                    />
+                }
+            </Header>
 
             { day && 
             <>
@@ -66,7 +62,7 @@ const ToDid = (props: ToDidProps) => {
             </>
             }
 
-            <Delete className='todid__delete'>
+            <Delete className='todid__delete' theme={themeContext}>
             { deleteWarning
                 ? 
                 <DeleteWarning>
@@ -101,6 +97,11 @@ const StyledToDid = styled.div`
     }
 `;
 
+const Header = styled.div`
+    display: flex;
+    justify-content: space-between;
+`;
+
 const Date = styled.div`
     color: #888;
     margin-bottom: 8px;
@@ -111,15 +112,14 @@ const Entry = styled.div`
 `;
 
 const Delete = styled.div`
-    display: block;
-    margin-top: 24px;
+    display: inline-block;
     cursor: pointer;
     font-size: 14px;
-    color: #777;
+    color: ${props => props.theme.secondary};
     visibility: hidden;
 
     &:hover {
-        color: #555;
+        color: ${props => props.theme.main};
     }
 `;
 

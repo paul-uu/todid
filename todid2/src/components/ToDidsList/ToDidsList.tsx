@@ -8,12 +8,11 @@ import List from './List';
 
 type IToDidsListProps = {
     todids: Object | null,
-    deleteTodid: Function,
-    updateTodid: Function
+    deleteTodid: Function
 }
 
 const ToDidsList:FC<IToDidsListProps> = (props) => {
-    const { todids, deleteTodid, updateTodid } = props;
+    const { todids, deleteTodid } = props;
     const [sort, setSort] = useState(SORT_OPTIONS.NEW.value);
     const [search, setSearch] = useState('');
     const [starFilter, setStarFilter] = useState(false);
@@ -49,8 +48,7 @@ const ToDidsList:FC<IToDidsListProps> = (props) => {
                     search={search} 
                     sort={sort}
                     starFilter={starFilter}
-                    deleteTodid={deleteTodid} 
-                    updateTodid={updateTodid}
+                    deleteTodid={deleteTodid}
                     className='' />
             }
         </>

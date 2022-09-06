@@ -27,7 +27,10 @@ function App() {
 
     const [selectedTab, setSelectedTab] = useState<string>(TABS.NEW);
     const [savedToDids, setSavedToDids] = useState<Object | null>(null);
-    const [isDayMode, setIsDayMode] = useState(true);
+    const [isDayMode, setIsDayMode] = useState(() => {
+        var hour = (new Date()).getHours();
+        return hour < 19 && hour >= 6;
+    });
 
     useEffect(() => {
         if (selectedTab === TABS.OLD && savedToDids === null) 
@@ -71,19 +74,20 @@ function App() {
     return (
         <ThemeProvider theme={isDayMode ? day : night }>
             <Container className="App">
-                <Header 
-                    selectedTab={selectedTab}
-                    setSelectedTab={setSelectedTab}
-                    isDayMode={isDayMode} 
-                    setIsDayMode={setIsDayMode}
-                />
-                { selectedTab === TABS.NEW
-                    ? <ToDidForm addNewTodid={createTodid} />
-                    : <ToDidsList 
-                        todids={savedToDids}
-                        deleteTodid={deleteTodid}
-                        updateTodid={updateTodid} />
-                }
+                <InnerContainer>
+                    <Header 
+                        selectedTab={selectedTab}
+                        setSelectedTab={setSelectedTab}
+                        isDayMode={isDayMode} 
+                        setIsDayMode={setIsDayMode}
+                    />
+                    { selectedTab === TABS.NEW
+                        ? <ToDidForm addNewTodid={createTodid} />
+                        : <ToDidsList 
+                            todids={savedToDids}
+                            deleteTodid={deleteTodid} />
+                    }
+                </InnerContainer>
             </Container>
         </ThemeProvider>
     );
@@ -91,12 +95,19 @@ function App() {
 
 const Container = styled.div`
     padding: 16px 64px;
-    max-width: 600px;
     margin-left: auto;
     margin-right: auto;
+    height: auto;
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
 
     color: ${props => props.theme.main};
     background-color: ${props => props.theme.background};
+`;
+const InnerContainer = styled.div`
+    max-width: 600px;
+    width: 100%;
 `;
 
 export default App;
