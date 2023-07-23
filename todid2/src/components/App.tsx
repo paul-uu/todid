@@ -4,11 +4,21 @@ import Header from './Header';
 import { IToDid } from '../interfaces';
 import ToDidForm from './ToDidForm';
 import ToDidsList from './ToDidsList/ToDidsList';
-import { TABS, LS_KEY } from '../constants';
+import { TABS, LS_KEY, DB_NAME, LS_TAGS_KEY } from '../constants';
 import { getUniqueId } from '../utils';
 import { day, night } from '../themes';
 
 // todo: look into indexedDb replacing localstorage
+// let db;
+// const request = window.indexedDB.open(DB_NAME);
+// request.onerror = (event) => {
+//     // @ts-ignore
+//     console.error(`Database error: ${event.target.errorCode}`);
+// };
+// request.onsuccess = (event) => {
+//     // @ts-ignore
+//     db = event.target.result;
+// };
 
 const readTodids = () => {
     let todids:{ [key: string]: any } = {};
@@ -38,6 +48,18 @@ function App() {
     }, [selectedTab]);
 
     const createTodid = (todid: IToDid) => {
+
+        if (todid.tags) {
+            let savedTags = window.localStorage.getItem(LS_TAGS_KEY);
+            let tagsToSave = todid.tags;
+            if (savedTags) {
+                savedTags = JSON.parse(savedTags);
+                // @ts-ignore
+                tagsToSave = [...new Set([...savedTags,...todid.tags])];
+            }
+            window.localStorage.setItem(LS_TAGS_KEY, JSON.stringify(tagsToSave))
+        }
+
         const newTodidKey = `${LS_KEY}-${getUniqueId()}`;
         window.localStorage.setItem(newTodidKey, JSON.stringify(todid))
         setSavedToDids(todids => {
@@ -60,6 +82,7 @@ function App() {
                 return copy;
             });
         }
+        // else show error message
     }
 
     const deleteTodid = (id: string) => {

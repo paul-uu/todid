@@ -12,7 +12,7 @@ type ToDidProps = {
 
 const ToDid = (props: ToDidProps) => {
     const { todidId, todid, deleteTodid } = props;
-    const { date, time, day, stuff, thoughts, food, starred } = todid;
+    const { date, time, day, stuff, thoughts, food, starred, tags } = todid;
     const [deleteWarning, setDeleteWarning] = useState(false);
 
     const themeContext = useContext(ThemeContext);
@@ -20,6 +20,8 @@ const ToDid = (props: ToDidProps) => {
     const handleDelete = (e: any) => {
         deleteTodid(todidId);
     }
+
+    console.log(todid);
 
     return (
         <StyledToDid theme={themeContext}>
@@ -60,6 +62,13 @@ const ToDid = (props: ToDidProps) => {
                 <label>I ate:</label>
                 <Entry>{food}</Entry>
             </>
+            }
+
+            { tags?.length &&
+            <Entry>
+                <span>Tags: </span>
+                { tags.map(tag => <span>{tag}</span>) }
+            </Entry>
             }
 
             <Delete className='todid__delete' theme={themeContext}>
